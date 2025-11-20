@@ -32,4 +32,3 @@ jobs:
           publish: npm publish --access public
         env:
           GITHUB_TOKEN: ${{ secrets.ACT_GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
