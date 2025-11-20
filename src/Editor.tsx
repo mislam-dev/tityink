@@ -1,26 +1,24 @@
 "use client";
-import { ParseOptions } from "@tiptap/pm/model";
-import { EditorProps } from "@tiptap/pm/view";
+import { type ParseOptions } from "@tiptap/pm/model";
 import {
   Editor,
   EditorContent,
   type Extensions as ExtensionsType,
   useEditor,
-  UseEditorOptions,
+  type UseEditorOptions,
 } from "@tiptap/react";
 import { useEffect, useState } from "react";
 import { BubbleMenu } from "./components/BubbleMenu";
 import { FloatingMenu } from "./components/FloatingMenu";
 import { Extensions } from "./Extensions";
 
-type CustomEditorProps = {
+export type CustomEditorProps = {
   extensions?: ExtensionsType;
   editable?: boolean; // default true
   immediatelyRender?: boolean; // default false
 
   editor?: {
     element?: Element | undefined;
-    editorProps?: EditorProps<any> | undefined;
     parseOptions?: ParseOptions | undefined;
     onUpdate?: UseEditorOptions["onUpdate"];
   };

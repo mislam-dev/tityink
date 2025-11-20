@@ -6,18 +6,13 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: "./src/index.ts",
-      name: "TipInk",
+      entry: "./src/index.tsx",
+      name: "TityInkEditor",
       fileName: "index",
       formats: ["cjs", "es"],
     },
     rollupOptions: {
       external: ["react", "react-dom"],
-      output: {
-        globals: {
-          react: "React",
-        },
-      },
     },
   },
 });

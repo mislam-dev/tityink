@@ -1,13 +1,13 @@
-import { Node, NodeView } from '@tiptap/core';
-import { ReactNodeViewRenderer } from '@tiptap/react';
-import ImageEmbed from './ImageEmbed';
+import { Node } from "@tiptap/core";
+import { ReactNodeViewRenderer } from "@tiptap/react";
+import { ImageEmbed } from "./ImageEmbed";
 
 export const ImageNodeView = Node.create({
-  name: 'image',
+  name: "image",
 
   inline: true,
 
-  group: 'inline',
+  group: "inline",
 
   draggable: true,
 
@@ -28,14 +28,14 @@ export const ImageNodeView = Node.create({
   parseHTML() {
     return [
       {
-        tag: 'img[src]',
+        tag: "img[src]",
       },
     ];
   },
 
   renderHTML({ node }) {
     const { src, alt, title } = node.attrs;
-    return ['img', { src, alt, title }];
+    return ["img", { src, alt, title }];
   },
 
   addNodeView() {
