@@ -1,24 +1,32 @@
-import { Node } from "@tiptap/core";
+import { Extension } from "@tiptap/core";
+import { Plugin } from "prosemirror-state";
 
-export const DisableNodeSelection = Node.create({
+export const DisableNodeSelection = Extension.create({
   name: "disableNodeSelection",
-
-  addCommands() {
-    return {
-      disableNodeSelection:
-        () =>
-        ({ commands }) => {
-          return commands.setNode("disableNodeSelection");
+  addProseMirrorPlugins() {
+    return [
+      new Plugin({
+        props: {
+          nodeViews: {},
+          handleDOMEvents: {
+            mousedown: () => {
+              setTimeout(() => {
+                document
+                  .querySelectorAll(".ProseMirror-selectednode")
+                  .forEach((node) => {
+                    if (node instanceof HTMLElement) {
+                      node.style.outline = "none";
+                      node.style.border = "none";
+                      node.style.boxShadow = "none";
+                      node.classList.remove("ProseMirror-selectednode");
+                    }
+                  });
+              }, 0);
+              return false;
+            },
+          },
         },
-    };
-  },
-
-  addNodeView() {
-    return {
-      // Prevent selection of this node
-      selectNode: () => false,
-    };
+      }),
+    ];
   },
 });
-
-export default DisableNodeSelection;

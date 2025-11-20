@@ -1,12 +1,16 @@
-// This file contains type definitions related to the Slash menu.
+import { Editor } from "@tiptap/core";
 
-export type SlashCommand = {
-  name: string;
-  description: string;
-  action: () => void;
+export type MenuSuggestionProps = {
+  editor: any;
+  items: MenuItem[];
+  command: (props: any) => void;
+  clientRect: () => DOMRect;
+  range: any;
+  event?: KeyboardEvent;
 };
 
-export type SlashMenuOptions = {
-  commands: SlashCommand[];
-  onCommandSelect: (command: SlashCommand) => void;
+export type MenuItem = {
+  icon: React.ReactNode;
+  title: string;
+  action: (editor: Editor) => unknown;
 };

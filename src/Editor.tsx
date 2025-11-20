@@ -1,5 +1,5 @@
-"use client";
-import { type ParseOptions } from "@tiptap/pm/model";
+import type { ParseOptions } from "@tiptap/pm/model";
+import type { EditorProps } from "@tiptap/pm/view";
 import {
   Editor,
   EditorContent,
@@ -12,20 +12,22 @@ import { BubbleMenu } from "./components/BubbleMenu";
 import { FloatingMenu } from "./components/FloatingMenu";
 import { Extensions } from "./Extensions";
 
-export type CustomEditorProps = {
+type CustomEditorProps = {
   extensions?: ExtensionsType;
   editable?: boolean; // default true
   immediatelyRender?: boolean; // default false
 
   editor?: {
     element?: Element | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    editorProps?: EditorProps<any> | undefined;
     parseOptions?: ParseOptions | undefined;
     onUpdate?: UseEditorOptions["onUpdate"];
   };
   getEditor?: (editor: Editor) => unknown;
 };
 
-export function CustomEditor(props: CustomEditorProps) {
+export function TityInkEditor(props: CustomEditorProps) {
   const {
     editor: editorProps = {},
     getEditor,

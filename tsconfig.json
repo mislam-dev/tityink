@@ -1,7 +1,32 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+  "compilerOptions": {
+    /* Output Targets */
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    /* Type Declarations for npm package */
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist/types",
+    "noEmit": false,
+    /* Module + Resolution */
+    "moduleResolution": "bundler",
+    "isolatedModules": false,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    /* Linting (keep minimal to avoid breaking emit) */
+    "strict": true,
+    "skipLibCheck": true,
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "vite/client"
+    ]
+  },
+  "include": [
+    "src"
   ]
 }

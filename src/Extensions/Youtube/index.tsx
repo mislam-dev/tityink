@@ -1,2 +1,1 @@
-export { YoutubeEmbed } from './YoutubeEmbed';
-export { YoutubeNodeView } from './YoutubeNodeView';
+export { CustomYoutubeEmbed as Youtube } from "./YoutubeEmbed";

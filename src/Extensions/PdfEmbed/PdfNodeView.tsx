@@ -1,40 +1,52 @@
-import { Node } from "@tiptap/core";
-import { ReactNodeViewRenderer } from "@tiptap/react";
-import { PdfEmbed } from "./PdfEmbed";
+import { type NodeViewProps, NodeViewWrapper } from "@tiptap/react";
+import * as React from "react";
+import { useState } from "react";
 
-export const PdfNodeView = Node.create({
-  name: "pdfEmbed",
+export const PdfNodeView: React.FC<NodeViewProps> = ({
+  node,
+  updateAttributes,
+}) => {
+  const [src, setSrc] = useState(node.attrs.src || "");
+  const [isError, setIsError] = useState(false);
 
-  inline: true,
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsError(false);
+    const file = e.target.files?.[0];
+    if (file && file.type === "application/pdf") {
+      const url = URL.createObjectURL(file);
+      setSrc(url);
+      updateAttributes({ src: url });
+      setIsError(true);
+    } else {
+      setIsError(true);
+    }
+  };
 
-  group: "inline",
+  if (src) {
+    return (
+      <NodeViewWrapper as="div" className="pdf-embed">
+        <iframe
+          src={src}
+          width="100%"
+          height="500px"
+          style={{ border: "none" }}
+        />
+      </NodeViewWrapper>
+    );
+  }
 
-  draggable: true,
+  return (
+    <NodeViewWrapper as="div" className="pdf-upload">
+      <input
+        type="file"
+        accept="application/pdf"
+        onChange={handleFileChange}
+        className="editorInput"
+      />
 
-  addAttributes() {
-    return {
-      src: {
-        default: null,
-      },
-    };
-  },
-
-  parseHTML() {
-    return [
-      {
-        tag: "iframe[src]",
-      },
-    ];
-  },
-
-  renderHTML({ node }) {
-    return [
-      "iframe",
-      { src: node.attrs.src, frameborder: "0", allow: "fullscreen" },
-    ];
-  },
-
-  addNodeView() {
-    return ReactNodeViewRenderer(PdfEmbed);
-  },
-});
+      <small className="text-red-500">
+        {isError && "You must select a valid pdf file"}
+      </small>
+    </NodeViewWrapper>
+  );
+};

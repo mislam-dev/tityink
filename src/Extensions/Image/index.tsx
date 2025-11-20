@@ -1,2 +1,1 @@
-export { ImageEmbed } from "./ImageEmbed";
-export { ImageNodeView } from "./ImageNodeView";
+export { CustomImageEmbed as Image } from "./ImageEmbed";

@@ -1,42 +1,28 @@
-import React from 'react';
-import { Editor } from '@tiptap/react';
+import { Editor, BubbleMenu as TiptapBubbleMenu } from "@tiptap/react";
+import { BubbleMenuItems } from "../../data/BubbleMenu";
 
-type BubbleMenuProps = {
-  editor: Editor;
-};
-
-export const BubbleMenu: React.FC<BubbleMenuProps> = ({ editor }) => {
-  if (!editor) {
-    return null;
-  }
-
-  const isActive = (command: string) => {
-    return editor.isActive(command);
-  };
-
-  const toggleBold = () => {
-    editor.chain().focus().toggleBold().run();
-  };
-
-  const toggleItalic = () => {
-    editor.chain().focus().toggleItalic().run();
-  };
-
+export const BubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   return (
-    <div className="bubble-menu">
-      <button
-        onClick={toggleBold}
-        className={isActive('bold') ? 'is-active' : ''}
+    <div>
+      <TiptapBubbleMenu
+        editor={editor}
+        tippyOptions={{ duration: 100 }}
+        className="flex overflow-hidden rounded border border-stone-200 bg-white shadow-md"
       >
-        Bold
-      </button>
-      <button
-        onClick={toggleItalic}
-        className={isActive('italic') ? 'is-active' : ''}
-      >
-        Italic
-      </button>
-      {/* Add more formatting options as needed */}
+        {BubbleMenuItems.map((bubbleMenuItem) => (
+          <button
+            key={Math.random()}
+            onClick={() => bubbleMenuItem.action(editor)}
+            className={`p-2 text-stone-600 hover:bg-stone-100 ${
+              bubbleMenuItem.isActive(editor)
+                ? "bg-stone-100 text-stone-900"
+                : ""
+            }`}
+          >
+            {bubbleMenuItem.icon}
+          </button>
+        ))}
+      </TiptapBubbleMenu>
     </div>
   );
 };

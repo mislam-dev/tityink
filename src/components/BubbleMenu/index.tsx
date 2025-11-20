@@ -1,1 +1,1 @@
-export { BubbleMenu } from './BubbleMenu';
+export { BubbleMenu } from "./BubbleMenu";
