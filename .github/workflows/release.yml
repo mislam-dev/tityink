@@ -7,12 +7,12 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
-  id-token: write
+  id-token: write # Required for npm trusted publishing
 
 jobs:
   release:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -21,15 +21,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: "https://registry.npmjs.org/"
+          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm install
 
-      - name: Create Release Pull Request or Publish
+      - name: Changesets Release
         uses: changesets/action@v1
         with:
           publish: npm publish --provenance --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.ACT_GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
