@@ -14,8 +14,8 @@ import { Extensions } from "./Extensions";
 
 type CustomEditorProps = {
   extensions?: ExtensionsType;
-  editable?: boolean; // default true
-  immediatelyRender?: boolean; // default false
+  editable?: boolean;
+  immediatelyRender?: boolean;
 
   editor?: {
     element?: Element | undefined;
