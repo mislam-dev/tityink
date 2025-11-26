@@ -1,5 +1,11 @@
 # @mislam-dev/tityink
 
+## 0.0.6
+
+### Patch Changes
+
+- 8f1b142: remove comments
+
 ## 0.0.5
 
 ### Patch Changes
