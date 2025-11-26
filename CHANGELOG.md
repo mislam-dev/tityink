@@ -1,5 +1,11 @@
 # @mislam-dev/tityink
 
+## 0.0.5
+
+### Patch Changes
+
+- 55fa44c: update workflows
+
 ## 0.0.2
 
 ### Patch Changes
